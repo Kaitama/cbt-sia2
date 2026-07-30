@@ -6,6 +6,9 @@ use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Schema;
+use Filament\Schemas\Components\Section;
+
+use Filament\Forms\Components\FileUpload;
 
 class UserForm
 {
@@ -13,19 +16,36 @@ class UserForm
     {
         return $schema
             ->components([
-                Toggle::make('is_staff')
-                    ->required(),
-                TextInput::make('name')
-                    ->required(),
-                TextInput::make('email')
-                    ->label('Email address')
-                    ->email()
-                    ->required(),
-                DateTimePicker::make('email_verified_at'),
-                TextInput::make('password')
-                    ->password()
-                    ->required(),
-                TextInput::make('photo_path'),
+                Section::make()
+                    ->columnSpanFull()
+                    ->columns(2)
+                    ->schema([
+                        // upload foto profil staff
+                        FileUpload::make('photo_path')
+                            ->label('Foto profil')
+                            ->hiddenLabel()
+                            ->image()
+                            ->avatar()
+                            ->alignCenter()
+                            ->columnSpanFull()
+                            ->disk('public')
+                            ->directory('avatar')
+                            ->imageEditor(),
+                        TextInput::make('name')
+                            ->label('Nama lengkap')
+                            ->required()
+                            ->columnSpanFull(),
+                        TextInput::make('email')
+                            ->label('Alamat email')
+                            ->unique('users', 'email')
+                            ->email()
+                            ->required(),
+                        TextInput::make('password')
+                            ->label('Kata sandi')
+                            ->password()
+                            ->revealable()
+                            ->required(),
+                    ])
             ]);
     }
 }
