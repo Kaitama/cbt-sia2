@@ -56,6 +56,7 @@ class ExamForm
                             )
                             ->closeOnDateSelection(),
                         Textarea::make('description')
+                            ->label('Keterangan tambahan')
                             ->columnSpanFull(),
                     ])
             ]);

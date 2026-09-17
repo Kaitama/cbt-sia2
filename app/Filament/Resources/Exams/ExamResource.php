@@ -6,6 +6,7 @@ use App\Filament\Resources\Exams\Pages\CreateExam;
 use App\Filament\Resources\Exams\Pages\EditExam;
 use App\Filament\Resources\Exams\Pages\ListExams;
 use App\Filament\Resources\Exams\Pages\ViewExam;
+use App\Filament\Resources\Exams\RelationManagers\SubjectsRelationManager;
 use App\Filament\Resources\Exams\Schemas\ExamForm;
 use App\Filament\Resources\Exams\Schemas\ExamInfolist;
 use App\Filament\Resources\Exams\Tables\ExamsTable;
@@ -44,7 +45,7 @@ class ExamResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            SubjectsRelationManager::class,
         ];
     }
 
